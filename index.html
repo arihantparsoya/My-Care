@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Care</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.5.0/kandy.js" ></script>
+    <script src="jquery.redirect.js" ></script>
+
+</head>
+
+<body>
+
+
+
+    <!-- Navigation -->
+
+    <!-- Header -->
+    <header id="top" class="header" >
+        <div class="text-vertical-center" style="width: 360px; padding: 8% 0 0;  margin: auto;">
+          <div  class="main_title" id="maintitle" >
+          </div>
+
+            <form name="login" style="position: relative;  z-index: 1;  background: #FFFFFF;  max-width: 360px;  margin: 0 auto 100px;  padding: 45px;  text-align: center;  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); opacity: 0.8;">
+            <input type="text" name="userid" placeholder="Username" style="height:100%; width:100%; font-family: "Roboto", sans-serif;  outline: 0;  background: #f2f2f2;  width: 100%;  border: 0;  margin: 0 0 15px;  padding: 15px;  box-sizing: border-box;  font-size: 14px;"/>
+            <br>
+            <br>
+            <input type="password" name="pswrd" placeholder="Password" style="height:100%; width:100%;   font-family: "Roboto", sans-serif;  outline: 0;  background: #f2f2f2;  width: 100%;  border: 0;  margin: 0 0 15px;  padding: 15px;  box-sizing: border-box;  font-size: 14px;"/>
+            <br>
+            <br>
+            <input type="button" class='btn btn-success' onclick="check(this.form)" value="Login" style="  font-family: "Roboto", sans-serif;  text-transform: uppercase;  outline: 0;  background: #4CAF50;  width: 100%;  border: 0;  padding: 15px;  color: #FFFFFF;  font-size: 14px;  -webkit-transition: all 0.3 ease;  transition: all 0.3 ease;  cursor: pointer;"/>
+            </form>
+            <h2 id="name" class="name"></h2>
+        </div>
+    </header>
+    <!-- About -->
+
+
+    <section id="doctorslist" class="doctorslist" style="background: url(../img/landscape.jpg) no-repeat center center scroll;">
+        <div class="container" width="300">
+            <div class="row">
+              <div id="loginScreen" style="opacity: 2;">
+
+
+                <style>
+
+                </style>
+                <title>Make Call</title>
+                <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.5.0/kandy.js" ></script>
+                <body>
+                	<fieldset id="share-file">
+				    <legend style="font-weight: bolder;">Send file</legend>
+
+
+				    <input type="file" id="image-input"/ style="background-color: white;color: black;border: 2px solid #87CEEB;">
+
+				    <input type="button" class='btn btn-success' value="Send Image" onclick="sendImage();" style="background-color: white;color: black;border: 2px solid #87CEEB;"/>
+				    <div id="message">(check the console)</div>
+					</fieldset>
+
+                <!-- Media containers. -->
+                <div  class = "remote_video" id="remote-container" style="height:90%;width:80%" ></div>
+
+                <div class = "Localvideo" id="local-container" style="width:20%"></div>
+                <fieldset id = "options">
+
+                    <!-- User input: Callee field. -->
+
+
+                    <!-- User input: Handle call buttons. -->
+                    <div class="extra-buttons">
+
+
+                      <input type="button" class="btn btn-success" value="Make Call" id="make-call" onclick="startCall();" style="background-color: white;color: black;border: 2px solid #87CEEB;"/>
+
+                      <input type="button" class="btn btn-success" value="Mute/Unmute Call" id="mute-call" onclick="toggleMute();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+
+                      <input type="button" class="btn btn-success"  value="Hold/Unhold Call" id="hold-call" onclick="toggleHold();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+
+                      <input type="button" class="btn btn-success" value="Show/Hide Video" id="show-video" onclick="toggleVideo();"style="background-color: white;color: black;border: 2px solid #87CEEB;"/>
+
+                      <input type="button" class="btn btn-success" value="End Call" id="end-call" onclick="endCall();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+
+                      <input type="button" class="btn btn-success" value="Accept Call" id="accept-call" onclick="acceptCall();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+
+                      <input type="button" class="btn btn-success" value="Decline Call" id="decline-call" onclick="declineCall();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+
+                      <input type="button" class="btn btn-success" value="Take Snapshot" id="snapshot" onclick="snapshot();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+
+                      <input type="button" class="btn btn-success" value="Start record" id="start-record" onclick="start_record();" style="background-color: white;color: black;border: 2px solid #87CEEB;"/>
+                      <input type="button" class="btn btn-success" value="Stop record" id="stop-record" onclick="stop_record();" style="background-color: white;color: black;border: 2px solid #87CEEB;"disabled/>
+                      </div>
+                      <div id="Console">
+                          <legend style="font-weight: bolder;">Console</legend>
+
+                          <!-- Message output container. -->
+                          <div id="messagesconsole"> </div>
+                      </div>
+                      <!--html for chat box-->
+
+
+					<div id="chat-div" style="opacity: 1">
+
+					    <textarea id="messageBox"> </textarea>
+
+					    <!-- User input: Send button. -->
+					    <input type="button" class="btn btn-success"  value="Send Message" onclick="sendMessage();" style="height: 46px;
+    					position: relative;
+    										top: 40px;
+    										left: -102px;" style="background-color: white;color: black;border: 2px solid #87CEEB;"/>
+
+					<fieldset>
+					    <legend style="width:20%" style="font-weight: bolder;">Chat</legend>
+					    <div id="chat-messages"> </div>
+					</fieldset>
+
+					</div>
+				</div>
+                </body>
+                <script>
+                /**
+                 * Kandy.io Call Demo
+                 * View this tutorial and others at https://developer.kandy.io/tutorials
+                 */
+
+                // Variables for logging in.
+                var projectAPIKey = "DAK36234518560148fe8de50704f3e64927";
+                var username = "";
+                var password = "";
+                var isLoggedIn = false;
+
+                // Setup Kandy to make and receive calls.
+                kandy.setup({
+                    // Designate HTML elements to be our stream containers.
+                    remoteVideoContainer: document.getElementById("remote-container"),
+                    localVideoContainer: document.getElementById("local-container"),
+
+                    // Register listeners to call events.
+                    listeners: {
+                        callinitiated: onCallInitiated,
+                        callincoming: onCallIncoming,
+                        callestablished: onCallEstablished,
+                        callended: onCallEnded
+                    }
+                });
+                kandy.setup({
+   				 listeners: {
+        message: onMessageReceived
+    }
+});
+                // Login automatically as the application starts.
+                kandy.login(projectAPIKey, username, password, onLoginSuccess, onLoginFailure);
+
+                // What to do on a successful login.
+                function onLoginSuccess() {
+                    log("Login was successful.");
+                }
+
+                // What to do on a failed login.
+                function onLoginFailure() {
+                    //log("Login failed. Make sure you input the user's credentials!");
+                }
+
+                // Utility function for appending messages to the message div.
+                function log(message) {
+                    document.getElementById("messagesconsole").innerHTML += "<div>" + message + "</div>";
+                }
+
+                // Variable to keep track of video display status.
+                var showVideo = true;
+
+                // Get user input and make a call to the callee.
+                function startCall() {
+                console.log(callee);
+                    // Tell Kandy to make a call to callee.
+                    kandy.call.makeCall(callee, showVideo);
+                console.log("called");
+                }
+                console.log("outofstartcall");
+
+                // Variable to keep track of the call.
+                var callId;
+
+                // What to do when a call is initiated.
+                function onCallInitiated(call, callee) {
+                console.log("OncallInitiated");
+                    log("Call initiated with " + callee + ". Ringing...");
+
+                    // Store the call id, so the caller has access to it.
+                    callId = call.getId();
+
+                    // Handle UI changes. A call is in progress.
+                    $("#make-call").hide("slow");
+                    $("#end-call").show("slow");
+                    document.getElementById("make-call").disabled = true;
+                    document.getElementById("end-call").disabled = false;
+                }
+
+                // What to do for an incoming call.
+                function onCallIncoming(call) {
+                    log("Incoming call from " + call.callerNumber);
+
+                    // Store the call id, so the callee has access to it.
+                    callId = call.getId();
+
+                    // Handle UI changes. A call is incoming.
+                    $("#accept-call").show("slow");
+                    $("#decline-call").show("slow");
+                    document.getElementById("accept-call").disabled = false;
+                    document.getElementById("decline-call").disabled = false;
+                }
+
+                // Accept an incoming call.
+                function acceptCall() {
+                    // Tell Kandy to answer the call.
+                    kandy.call.answerCall(callId, showVideo);
+                    // Second parameter is false because we are only doing voice calls, no video.
+
+                    log("Call answered.");
+                    // Handle UI changes. Call no longer incoming.
+                    $("#accept-call").hide("slow");
+                    $("#decline-call").hide("slow");
+                    document.getElementById("accept-call").disabled = true;
+                    document.getElementById("decline-call").disabled = true;
+                }
+
+                // Reject an incoming call.
+                function declineCall() {
+                    // Tell Kandy to reject the call.
+                    kandy.call.rejectCall(callId);
+
+                    log("Call rejected.");
+                    // Handle UI changes. Call no longer incoming.
+                    $("#accept-call").hide("slow");
+                    $("#decline-call").hide("slow");
+                    document.getElementById("accept-call").disabled = true;
+                    document.getElementById("decline-call").disabled = true;
+                }
+
+                // What to do when call is established.
+                function onCallEstablished(call) {
+                    log("Call established.");
+
+                    // Handle UI changes. Call in progress.
+                    $("#make-call").hide("slow");
+                    $("#mute-call").show("slow");
+                    $("#hold-call").show("slow");
+                    $("#end-call").show("slow");
+                    document.getElementById("make-call").disabled = true;
+                    document.getElementById("mute-call").disabled = false;
+                    document.getElementById("hold-call").disabled = false;
+                    document.getElementById("end-call").disabled = false;
+                }
+
+                // End a call.
+                function endCall() {
+                    // Tell Kandy to end the call.
+                    kandy.call.endCall(callId);
+                }
+
+                // Variable to keep track of mute status.
+                var isMuted = false;
+
+                // Mute or unmute the call, depending on current status.
+                function toggleMute() {
+                    if(isMuted) {
+                        kandy.call.unMuteCall(callId);
+                        log("Unmuting call.");
+                        isMuted = false;
+                    } else {
+                        kandy.call.muteCall(callId);
+                        log("Muting call.");
+                        isMuted = true;
+                    }
+                }
+
+                // Variable to keep track of hold status.
+                var isHeld = false;
+
+                // Hold or unhold the call, depending on current status.
+                function toggleHold() {
+                    if(isHeld) {
+                        kandy.call.unHoldCall(callId);
+                        log("Unholding call.");
+                        isHeld = false;
+                    } else {
+                        kandy.call.holdCall(callId);
+                        log("Holding call.");
+                        isHeld = true;
+                    }
+                }
+
+                // What to do when a call is ended.
+                function onCallEnded(call) {
+                    log("Call ended.");
+
+                    // Handle UI changes. No current call.
+                    $("#make-call").show("slow");
+                    $("#mute-call").hide("slow");
+                    $("#hold-call").hide("slow");
+                    $("#end-call").hide("slow");
+                    document.getElementById("make-call").disabled = false;
+                    document.getElementById("mute-call").disabled = true;
+                    document.getElementById("hold-call").disabled = true;
+                    document.getElementById("end-call").disabled = true;
+
+                    // Call no longer active, reset mute and hold statuses.
+                    isMuted = false;
+                    isHeld = false;
+                }
+
+                // Show or hide video, depending on current status.
+                function toggleVideo() {
+                    if(showVideo) {
+                        kandy.call.stopCallVideo(callId);
+                        log("Stopping send of video.");
+                        showVideo = false;
+                    } else {
+                        kandy.call.startCallVideo(callId);
+                        log("Starting send of video.");
+                        showVideo = true;
+                    }
+                }
+                function startrecord(){
+                    //write code for start record here
+                }
+                function stoprecord(){
+                    //write code for stop record here
+                }
+                function snapshot() {
+                    // wrie snapshot code here
+                }
+				                // Gathers the user's input and sends a message to the recipient.
+				function sendMessage() {
+				    var recipient = callee;
+				    var message = document.getElementById("messageBox").value;
+
+				    kandy.messaging.sendIm(recipient, message, onSendSuccess, onSendFailure);
+				}
+
+				// What to do on a successful send message.
+				function onSendSuccess(message) {
+ 				   // Display the message as outgoing.
+    				var recipient = message.destination.split("@")[0];
+    				// Create the message element. Use Lodash to escape the message for security purposes.
+    				var element = "<div>Outgoing (" + recipient + "): " + _.escape(message.message.text) + "</div>";
+    				document.getElementById("chat-messages").innerHTML += element;
+				}
+
+				// What to do on a failed send message.
+				function onSendFailure() {
+				    log("Send Message failed.");
+				}
+
+				/**
+				 * Called when the `message` event is triggered.
+				 * Receives the message object as a parameter.
+				 */
+         function onMessageReceived(message) {
+             // Check the type of message received.
+             if(message.contentType === "image") {
+                 // Build the image Url.
+                 var imageUrl = kandy.messaging.buildFileUrl(message.message.content_uuid);
+
+                 // Create img and download link elements.
+                 var imageElement = '<img src="' + imageUrl + '">';
+                 var imageDownload = '<a href="' + imageUrl + '" download>Download</a>';
+
+                 // Display a message and download link to the user.
+                 log(message.sender.user_id + ' has sent you an image! ' + imageDownload);
+                 // Display the image.
+                 log(imageElement);
+             }
+         }
+				function sendImage() {
+    			// Gather user input.
+    				var recipient = callee;
+    				var image = document.getElementById("image-input").files[0];
+
+    				// Send the image to the recipient.
+    				kandy.messaging.sendImWithImage(recipient, image, onFileSendSuccess, onFileSendFailure);
+}
+
+
+// What to do on a file send success.
+function onFileSendSuccess(message) {
+    log(message.message.content_name + " sent successfully.");
+}
+
+// What to do on a file send failure.
+function onFileSendFailure() {
+    log("File send failure.");
+}
+                </script>
+
+                <div class="col-lg-12 text-center">
+                    <h1 id="your"></h1>
+                  </div>
+                  <div class="col-lg-12 text-center" id="otheruser">
+
+              </div>
+              <!-- /.row -->
+          </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+
+
+    <!-- Callout -->
+    <aside class="callout">
+        <div class="text-vertical-center">
+            <h1 style="color: black;">It is health that is real wealth and not pieces of gold and silver. - MK Gandhi</h1>
+        </div>
+    </aside>
+
+    <!-- Portfolio -->
+
+    <!-- Call to Action -->
+
+
+    <!-- Map -->
+    <section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>About Us</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-heart"></i>
+                            </span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-leaf"></i>
+                            </span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-star"></i>
+                            </span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="glyphicon glyphicon-heart"></i>
+                            </span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4 ><strong id="title"></strong>
+                    </h4>
+                    <p>IIT Powai <br> Mumbai</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> 8884999321</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">parsoyaarihant@gmail.com</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+
+    </script>
+
+
+
+
+    <script language="javascript">
+var users={
+  "patient":[
+      {"name":"user", "id":"user1@arihantparsoya.gmail.com"},
+      {"name":"Anna Hathway",	"id":"user2@arihantparsoya.gmail.com"},
+      {"name":"Christopher", "id":"user3@arihantparsoya.gmail.com"}
+  ],
+  "doctor":[
+      {"name":"Pritam", "id":"user4@arihantparsoya.gmail.com"},
+      {"name":"Siddhesh",	"id":"user5@arihantparsoya.gmail.com"},
+  ]
+};
+
+var usertype=true; //...true for patient and false for doctor
+
+    $( document ).ready(function() {
+        $("#mute-call").hide();
+        $("#hold-call").hide();
+        $("#end-call").hide();
+        $("#accept-call").hide();
+        $("#decline-call").hide();
+        $("#snapshot").hide();
+        $("#stop-record").hide();
+        $("#start-record").hide();
+        $("#show-video").hide();
+        $("#doctorslist").hide();
+        $("#maintitle").html("<h2 style='font-size:500%'><strong>My Care</strong></h2>");
+
+        $("#arihant").click(function(){
+
+        console.log('clicked');
+
+    });
+
+    });
+
+
+
+    kandy.setup();
+    function check(form)/*function to check userid & password*/
+    {
+      username=form.userid.value;
+      password=form.pswrd.value;
+     /*the following code checkes whether the entered userid and password are matching*/
+      toggleLogin();
+    }
+
+
+    function toggleLogin() {
+       if(isLoggedIn) {
+           kandy.logout(onLogoutSuccess);
+       } else {
+           kandy.login(projectAPIKey, username, password, onLoginSuccess, onLoginFailure);
+       }
+    }
+
+    // Utility function for appending messages to the message div.
+
+
+    // What to do on a successful login.
+    function onLoginSuccess() {
+      //alert("Login was successful.");
+      for(var i=0;i<2;i++){
+        if(username==users.doctor[i].id){
+          usertype=false;
+          $("#maintitle").html("<h2 style='font-size:500%'><strong>My Patient</strong></h2>");
+        }
+      }
+      if(usertype==true){
+        $("#maintitle").html("<h2 style='font-size:500%'><strong>My Doctor</strong></h2>");
+      }
+          $("form").hide("slow");
+          $("h2").show("slow");
+          $('.name').html("<h1 style='color:black'>we care for you</h1> "+username);
+      $("#doctorslist").show("slow");
+      if(usertype==false){
+        $("#your").html("Your Patients");
+        $("#otheruser").html("<ul type='none'><li><input type='button' class='btn btn-success' value='Arihant' onclick='viewdoctor(0)'></li><br><li><input type='button' class='btn btn-success' value='Anna Hathway' onclick='viewdoctor(1)'></li><br><li><input type='button' class='btn btn-success' value='Christopher' onclick='viewdoctor(2)'></li></ul>")
+      }
+      if(usertype==true){
+        $("#your").html("Your Doctors");
+        $("#otheruser").html(" <ul type='none'><li><input type='button' class='btn btn-success'  value='Pritam' onclick='viewdoctor(0)'></li><br><li><input type='button' class='btn btn-success' value='Siddhesh' onclick='viewdoctor(1)'></li></ul>")
+      }
+
+      $('html, body').animate({
+        scrollTop: $("#about").offset().top
+      }, 1000);
+        isLoggedIn = true;
+
+    }
+
+    // What to do on a failed login.
+    function onLoginFailure() {
+        alert("Login failed.");
+    }
+
+    // What to do on a succesful logout.
+    function onLogoutSuccess() {
+        lert("Logout was successful.");
+        isLoggedIn = false;
+    }
+
+
+
+    function viewdoctor(number){
+      if(usertype==true){
+        callee=users.doctor[number].id;
+        recipient=callee;
+      }
+      else{
+        callee=users.patient[number].id;
+        recipient=callee;
+      }
+      //.......press the hidden button to display the pop up
+window.location.href = '#loginScreen';
+      //$('#arihant').trigger("click");
+    }
+
+    </script>
+
+
+
+
+</body>
+
+</html>
